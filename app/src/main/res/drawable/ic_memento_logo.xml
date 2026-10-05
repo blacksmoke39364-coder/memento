@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Background Shield Frame -->
+    <path
+        android:fillColor="#131822"
+        android:strokeColor="#E2E8F0"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M54,24 L78,35 L78,57 C78,71 67,82 54,86 C41,82 30,71 30,57 L30,35 Z" />
+
+    <!-- Stylized Silver 'M' for Memento -->
+    <path
+        android:fillColor="#E2E8F0"
+        android:pathData="M42,42 L46,42 L54,56 L62,42 L66,42 L66,66 L61,66 L61,49 L54.5,60 L53.5,60 L47,49 L47,66 L42,66 Z" />
+
+    <!-- Pulse Node at Shield Crown -->
+    <path
+        android:fillColor="#10B981"
+        android:pathData="M54,24m-2.5,0a2.5,2.5 0,1 1,5 0a2.5,2.5 0,1 1,-5 0" />
+</vector>

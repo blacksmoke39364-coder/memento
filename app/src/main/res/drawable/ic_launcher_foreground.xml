@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Glowing background accent circle -->
+    <path
+        android:fillColor="#1E2638"
+        android:pathData="M54,54m-34,0a34,34 0,1 1,68 0a34,34 0,1 1,-68 0" />
+    <path
+        android:fillColor="#E2E8F0"
+        android:fillAlpha="0.18"
+        android:pathData="M54,54m-28,0a28,28 0,1 1,56 0a28,28 0,1 1,-56 0" />
+
+    <!-- Outer shield / memory vault geometric contour -->
+    <path
+        android:strokeColor="#E2E8F0"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M54,26 L76,36 L76,55 C76,68 66,78 54,82 C42,78 32,68 32,55 L32,36 Z" />
+
+    <!-- Stylized "M" for Memento inside vault -->
+    <path
+        android:fillColor="#E2E8F0"
+        android:pathData="M42,42 L46,42 L54,56 L62,42 L66,42 L66,66 L61,66 L61,49 L54.5,60 L53.5,60 L47,49 L47,66 L42,66 Z" />
+
+    <!-- Pulse nodes on corners -->
+    <path
+        android:fillColor="#10B981"
+        android:pathData="M54,26m-2.5,0a2.5,2.5 0,1 1,5 0a2.5,2.5 0,1 1,-5 0" />
+    <path
+        android:fillColor="#E2E8F0"
+        android:pathData="M76,36m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0" />
+    <path
+        android:fillColor="#E2E8F0"
+        android:pathData="M32,36m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0" />
+</vector>

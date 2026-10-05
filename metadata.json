@@ -1,0 +1,6 @@
+{
+  "name": "Memento",
+  "description": "Privacy-first personal memory system. Your life remembers what you forget.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
