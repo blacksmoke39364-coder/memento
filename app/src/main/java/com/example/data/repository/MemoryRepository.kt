@@ -361,7 +361,7 @@ class MemoryRepository(
      */
     suspend fun askMemento(userId: String, question: String): MemoryRetrievalResult {
         val allMemories = memoryDao.getAllActiveMemories(userId).firstOrNull() ?: emptyList()
-        val timelineEvents = memoryDao.getTimelineForEntity(userId, "", "").firstOrNull() ?: emptyList()
+        val timelineEvents = memoryDao.getAllTimelineEvents(userId).firstOrNull() ?: emptyList()
 
         val result = geminiService.retrieveAnswer(question, allMemories, timelineEvents)
         logAudit(userId, "MEMORY_RETRIEVED", "Queried memory: '$question', isKnown=${result.isKnown}.")

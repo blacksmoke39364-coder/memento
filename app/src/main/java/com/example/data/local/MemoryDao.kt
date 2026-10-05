@@ -63,6 +63,9 @@ interface MemoryDao {
     @Query("SELECT * FROM timeline_events WHERE userId = :userId AND (LOWER(entityTitle) = LOWER(:title) OR memoryId = :memoryId) ORDER BY timestamp ASC")
     fun getTimelineForEntity(userId: String, title: String, memoryId: String = ""): Flow<List<MemoryTimelineEvent>>
 
+    @Query("SELECT * FROM timeline_events WHERE userId = :userId ORDER BY timestamp ASC")
+    fun getAllTimelineEvents(userId: String): Flow<List<MemoryTimelineEvent>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTimelineEvent(event: MemoryTimelineEvent)
 

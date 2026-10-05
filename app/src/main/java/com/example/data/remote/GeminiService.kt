@@ -281,21 +281,21 @@ class GeminiService(private val apiKey: String) {
 
         return when {
             lower.contains("passport") -> {
-                val loc = if (lower.contains("drawer")) "Drawer 2, Bedroom table" else "Bedroom"
+                val loc = extractLocation(input)
                 ParsedMemoryResponse("Passport", "THING", input, loc, null, "CONFIRMED")
             }
             lower.contains("college id") || lower.contains("id card") -> {
-                val loc = if (lower.contains("backpack")) "Black backpack" else if (lower.contains("desk")) "Desk" else "Backpack"
+                val loc = extractLocation(input)
                 ParsedMemoryResponse("College ID", "THING", input, loc, null, "CONFIRMED")
             }
             lower.contains("key") || lower.contains("car key") -> {
-                val loc = if (lower.contains("hook")) "Key Hook, Hallway" else if (lower.contains("jacket")) "Jacket pocket" else "Key Hook"
+                val loc = extractLocation(input)
                 val person = if (lower.contains("rahul")) "Rahul" else null
                 ParsedMemoryResponse("Car Keys", "THING", input, loc, person, "CONFIRMED")
             }
             lower.contains("charger") || lower.contains("cable") -> {
                 val person = if (lower.contains("rahul")) "Rahul" else null
-                val loc = if (lower.contains("desk")) "My desk" else if (lower.contains("backpack")) "Black backpack" else null
+                val loc = extractLocation(input)
                 ParsedMemoryResponse("Charger", if (person != null) "PEOPLE" else "THING", input, loc, person, "CONFIRMED")
             }
             lower.contains("promise") || lower.contains("call") || lower.contains("send") -> {
@@ -314,9 +314,27 @@ class GeminiService(private val apiKey: String) {
                 // Extract first few words as title
                 val words = input.trim().split(" ")
                 val title = words.take(3).joinToString(" ").replaceFirstChar { it.uppercase() }
-                ParsedMemoryResponse(title, "THING", input, null, null, "CONFIRMED")
+                ParsedMemoryResponse(title, "THING", input, extractLocation(input), null, "CONFIRMED")
             }
         }
+    }
+
+    /**
+     * Extracts only an explicitly stated location. The local mode must never
+     * manufacture a location, because Memento's answers are evidence-based.
+     */
+    private fun extractLocation(input: String): String? {
+        val match = Regex(
+            "\\b(?:in|inside|at|on|under|near|by)\\s+(?:the\\s+)?(.+?)(?=[.!?,;]|$)",
+            RegexOption.IGNORE_CASE
+        ).find(input) ?: return null
+
+        return match.groupValues[1]
+            .trim()
+            .replace(Regex("^(?:my|a|an)\\s+", RegexOption.IGNORE_CASE), "")
+            .trim()
+            .takeIf { it.isNotBlank() }
+            ?.replaceFirstChar { it.uppercase() }
     }
 
     /**

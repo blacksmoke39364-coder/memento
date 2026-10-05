@@ -37,6 +37,14 @@ class ExampleRobolectricTest {
     }
 
     @Test
+    fun `local parser never invents a location`() {
+        val service = GeminiService("")
+        val parsed = service.fallbackLocalParse("I need to remember my passport.", SourceType.TEXT)
+        assertEquals("Passport", parsed.title)
+        assertEquals(null, parsed.location)
+    }
+
+    @Test
     fun `test fallback retrieval for college id with location`() {
         val service = GeminiService("")
         val memory = MemoryEntity(
@@ -62,6 +70,33 @@ class ExampleRobolectricTest {
         val result = service.fallbackLocalRetrieve("Where is my gold watch?", emptyList(), emptyList())
         assertFalse(result.isKnown)
         assertTrue(result.answer.contains("I don't know"))
+    }
+
+    @Test
+    fun `timeline location takes priority over an older memory location`() {
+        val service = GeminiService("")
+        val memory = MemoryEntity(
+            id = "keys-1",
+            userId = "test-user",
+            type = MemoryType.THING,
+            title = "Keys",
+            content = "Keys were on the table",
+            location = "Table",
+            evidenceLevel = EvidenceLevel.CONFIRMED,
+            sourceExplanation = "You told Memento earlier"
+        )
+        val moved = MemoryTimelineEvent(
+            memoryId = "keys-1",
+            userId = "test-user",
+            entityTitle = "Keys",
+            eventDescription = "Moved to the desk",
+            location = "Desk"
+        )
+
+        val result = service.fallbackLocalRetrieve("Where are my keys?", listOf(memory), listOf(moved))
+        assertTrue(result.isKnown)
+        assertEquals("Desk", result.location)
+        assertTrue(result.answer.contains("Desk"))
     }
 
     @Test
