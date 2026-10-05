@@ -8,7 +8,7 @@ you promised to do.
 
 The installable APK is published on the project's
 [GitHub Releases page](https://github.com/blacksmoke39364-coder/memento/releases).
-Download `Memento-debug.apk` from the latest release on an Android device, open
+Download `app-debug.apk` from the latest release on an Android device, open
 it, and approve the Android installation prompt if asked.
 
 The published APK is a debug-signed build intended for direct testing. Android
@@ -37,7 +37,7 @@ The output is `app/build/outputs/apk/debug/app-debug.apk`.
 ## Create a public release
 
 Push a version tag such as `v1.0.0`. GitHub Actions builds the APK and creates
-a matching GitHub Release with `Memento-debug.apk` attached. This makes the
+a matching GitHub Release with `app-debug.apk` attached. This makes the
 download available directly from the Releases page.
 
 ## Optional Gemini key
